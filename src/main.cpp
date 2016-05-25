@@ -88,8 +88,10 @@ int main ( int argc, char *argv[] )
 	auto pStart = steady_clock::now();
 	while (!sNode->finish() && ants.getNiteration() <= maxIteration) {
 		ants.runIteration();
+		if (output == &cout)
+			*output << "\rIteration:\t" << ants.getNiteration() << " / " << maxIteration << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << flush;
 		if (ants.getNiteration() % a.get<unsigned>("interval") == 0) {
-			*output << "Iteration:\t" << ants.getNiteration() << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << endl;
+			*output << "\rIteration:\t" << ants.getNiteration() << " / " << maxIteration << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << endl;
 		}
 	}
 	if (sNode->finish())
