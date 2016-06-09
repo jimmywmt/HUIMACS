@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Jimmy Ming-Tai Wu, 
+ *         Author:  Jimmy Ming-Tai Wu (wmt@wmt35.idv.tw)
  *   Organization:  UNLV
  *
  * =====================================================================================
@@ -86,16 +86,16 @@ int main ( int argc, char *argv[] )
 	*output << "Local Updating Rule Parameter: " << a.get<double>("rho") << endl << endl;
 	*output << "Processing Ant Colony System Algorithm..." << endl;
 	auto pStart = steady_clock::now();
-	while (!sNode->finish() && ants.getNiteration() <= maxIteration) {
+	while (!sNode->finish() && ants.getNIteration() <= maxIteration) {
 		ants.runIteration();
 		if (output == &cout)
-			*output << "\rIteration:\t" << ants.getNiteration() << " / " << maxIteration << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << flush;
-		if (ants.getNiteration() % a.get<unsigned>("interval") == 0) {
-			*output << "\rIteration:\t" << ants.getNiteration() << " / " << maxIteration << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << endl;
+			*output << "\rIteration:\t" << ants.getNIteration() << " / " << maxIteration << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << flush;
+		if (ants.getNIteration() % a.get<unsigned>("interval") == 0) {
+			*output << "\rIteration:\t" << ants.getNIteration() << " / " << maxIteration << "\t\t "<< "NUM of HUIs:\t" << ants.huis.size() << endl;
 		}
 	}
 	if (sNode->finish())
-		*output << endl << "Algorithm terminated on generation " << ants.getNiteration() << " (ALL HUIs discovered)" << endl;
+		*output << endl << "Algorithm terminated on generation " << ants.getNIteration() << " (ALL HUIs discovered)" << endl;
 	else
 		*output << endl << "Algorithm terminated on maximum generation" << endl;
 	auto pEnd = steady_clock::now();

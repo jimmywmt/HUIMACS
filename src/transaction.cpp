@@ -10,8 +10,8 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  YOUR NAME (), 
- *   Organization:  
+ *         Author:  Jimmy Ming-Tai Wu (wmt@wmt35.idv.tw)
+ *   Organization:  UNLV
  *
  * =====================================================================================
  */
@@ -36,7 +36,7 @@ using namespace std;
 //{
 //}  /* -----  end of method Transaction::Transaction  (constructor)  ----- */
 
-Transaction::Transaction ( const double& iThresholdRatio) {
+Transaction::Transaction ( const double& iThresholdRatio ) {
 	totalUtility = 0;
 	thresholdRatio = iThresholdRatio;
 }
@@ -86,7 +86,7 @@ Transaction::operator = ( const Transaction &other )
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-const double& Transaction::getThreshold() {
+const double& Transaction::getThreshold () {
 	return threshold;
 }
 
@@ -97,7 +97,7 @@ const double& Transaction::getThreshold() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-size_t Transaction::size() const {
+size_t Transaction::size () const {
 	return data.size();
 }
 
@@ -108,7 +108,7 @@ size_t Transaction::size() const {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-size_t Transaction::itemCount() const {
+size_t Transaction::itemCount () const {
 	if (invertTable.front().size() == 0u)
 		return invertTable.size() - 1u;
 	else
@@ -177,7 +177,7 @@ bool Transaction::readData ( const std::string& path ) {
 		if (twu.twUtility > threshold)
 			oneTWUs.push_back(twu);
 	}
-	sort(oneTWUs.begin(), oneTWUs.end(), oneTWU());
+	sort(oneTWUs.begin(), oneTWUs.end(), [] ( const oneTWU& i, const oneTWU& j ) { return i.twUtility < j.twUtility; });
 	for (const auto& i : oneTWUs) {
 		oneTWUsName.push_back(i.name);
 	}
@@ -192,7 +192,7 @@ bool Transaction::readData ( const std::string& path ) {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-tuple<unsigned, bool, bool, unsigned> Transaction::calculateUtility (list<unsigned>& relatedTransaction, const vector<int>& cItemset) {
+tuple<unsigned, bool, bool, unsigned> Transaction::calculateUtility ( list<unsigned>& relatedTransaction, const vector<int>& cItemset ) {
 	unsigned name = cItemset.back();
 	unsigned utility = 0u;
 	unsigned twUtility = 0u;

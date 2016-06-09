@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Jimmy Ming-Tai Wu
+ *         Author:  Jimmy Ming-Tai Wu (wmt@wmt35.idv.tw)
  *   Organization:  UNLV
  *
  * =====================================================================================
@@ -42,7 +42,7 @@ namespace huimacs {
 			~ACS ();                            /* destructor       */
 
 			/* ====================  ACCESSORS     ======================================= */
-			unsigned getNiteration();
+			unsigned getNIteration();
 			unsigned getLastFind();
 
 			/* ====================  MUTATORS      ======================================= */

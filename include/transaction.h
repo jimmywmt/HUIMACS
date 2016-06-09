@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Jimmy Ming-Tai Wu
+ *         Author:  Jimmy Ming-Tai Wu (wmt@wmt35.idv.tw)
  *   Organization:  UNLV
  *
  * =====================================================================================
@@ -56,7 +56,7 @@ namespace huimacs {
 			Transaction& operator = ( const Transaction &other ); /* assignment operator */
 
 			bool readData ( const std::string& path );
-			std::tuple<unsigned, bool, bool, unsigned> calculateUtility (std::list<unsigned>& relatedTransaction, const std::vector<int>& cItemset);
+			std::tuple<unsigned, bool, bool, unsigned> calculateUtility ( std::list<unsigned>& relatedTransaction, const std::vector<int>& cItemset );
 
 			/*-----------------------------------------------------------------------------
 			 *  struct for 1-HTWUIs
@@ -64,7 +64,6 @@ namespace huimacs {
 			struct oneTWU {
 				int    name;
 				double twUtility;
-				bool operator () ( const oneTWU& i, const oneTWU& j ) { return i.twUtility < j.twUtility; }
 			};
 			std::vector<oneTWU> oneTWUs;
 

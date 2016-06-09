@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  Jimmy Ming-Tai Wu
+ *         Author:  Jimmy Ming-Tai Wu (wmt@wmt35.idv.tw)
  *   Organization:  UNLV
  *
  * =====================================================================================
@@ -85,11 +85,11 @@ ACS::operator = ( const ACS &other )
 /*
  *--------------------------------------------------------------------------------------
  *       Class:  ACS
- *      Method:  ACS :: getNiteration
+ *      Method:  ACS :: getNIteration
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-unsigned ACS::getNiteration() {
+unsigned ACS::getNIteration() {
 	return nIteration;
 }
 

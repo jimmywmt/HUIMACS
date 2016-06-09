@@ -1,0 +1,8 @@
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
+HUIMACS
+lib/acs.o
+lib/main.o
+lib/node.o
+lib/ptable.o
+lib/transaction.o
