@@ -86,7 +86,7 @@ Transaction::operator = ( const Transaction &other )
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-const double& Transaction::getThreshold () {
+const double& Transaction::getThreshold () const {
 	return threshold;
 }
 

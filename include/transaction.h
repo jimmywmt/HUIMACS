@@ -40,14 +40,14 @@ namespace huimacs {
 		public:
 			/* ====================  LIFECYCLE     ======================================= */
 			Transaction () = delete;                             /* constructor      */
-			Transaction (const double& iThresholdRatio );
+			Transaction ( const double& iThresholdRatio );
 			Transaction ( const Transaction &other ) = delete;   /* copy constructor */
 			~Transaction ();                            /* destructor       */
 
 			/* ====================  ACCESSORS     ======================================= */
-			const double& getThreshold ();
+			const double& getThreshold () const;
 			size_t size () const;
-			size_t itemCount() const;
+			size_t itemCount () const;
 
 			/* ====================  MUTATORS      ======================================= */
 

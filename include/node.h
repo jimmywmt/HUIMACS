@@ -46,10 +46,10 @@ namespace huimacs {
 			/* ====================  ACCESSORS     ======================================= */
 			static const Node* getStartNode();
 
-			int    getName ();
-			double getPheromone ();
-			void   setRelatedTransactions(const std::list<unsigned> transactions);
-			std::list<unsigned> getRelatedTransactions();
+			int    getName () const;
+			double getPheromone () const;
+			void   setRelatedTransactions ( const std::list<unsigned> transactions );
+			std::list<unsigned> getRelatedTransactions ();
 
 			/* ====================  MUTATORS      ======================================= */
 
@@ -59,6 +59,7 @@ namespace huimacs {
 			static void     recurisivePrune ( Node* node );
 			static void     globalUpdate ( const std::vector<int> itemset, const unsigned& utility, const double& threshold );
 			static Node*    initStartNode ( const std::list<int>& iFollowingNodes, const double& initPheromone );
+			static void     deleteStartNode ();
 			static void     initTwoTWU ( const size_t& nCandidate );
 			static void     setLOneTWU ( std::vector<Transaction::oneTWU>* ILOneTWU );
 			static void     setCandidateIndex ();
@@ -68,18 +69,18 @@ namespace huimacs {
 			void  positivePrue ( const std::vector<int> itemset, const PTable& pTable );
 			void  localUpdate ( const double& rho, const double& initPheromone );
 			bool  finish ();
-			bool  calculated();
-			void  setCalculated();
-			Node* selectNext(std::vector<int>& cItemset, const double& alpha, const double& beta, const double& q0, const PTable& pTable, const double& initPheromone);
-			void  clearRemainNodes();
+			bool  calculated ();
+			void  setCalculated ();
+			Node* selectNext ( std::vector<int>& cItemset, const double& alpha, const double& beta, const double& q0, const PTable& pTable, const double& initPheromone );
+			void  clearRemainNodes ();
 
-			static Node* lStartNode;
 
 		protected:
 			/* ====================  DATA MEMBERS  ======================================= */
 
 		private:
 			/* ====================  DATA MEMBERS  ======================================= */
+			static Node*                                                 lStartNode;
 			static std::vector<unsigned>                                 twoTWU;
 			static std::vector<Transaction::oneTWU>*                     lOneTWU;
 			static std::vector<std::list<std::pair<unsigned, unsigned>>> indexTable;

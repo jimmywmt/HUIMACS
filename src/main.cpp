@@ -44,7 +44,7 @@ int main ( int argc, char *argv[] )
 	time_t now = time(0);
 	a.add<string>("file", 'f', "database file path", true);
 	a.add<double>("threshold", 't', "high utility itemset threshold", true);
-	a.add<unsigned>("max", 'm', "maximum iteration", false, 10000);
+	a.add<unsigned>("max", 'm', "maximum iteration", false, 10'000);
 	a.add<unsigned>("size", 's', "population size", false, 20);
 	a.add<double>("pheromone", 'p', "inital pheromone", false, 1.0);
 	a.add<double>("rho", 'r', "rho", false, 0.4);
@@ -58,7 +58,7 @@ int main ( int argc, char *argv[] )
 	ostream* output(&cout);
 	if (a.exist("write")) {
 		tm *ltm = localtime(&now);
-		string outpath = a.get<string>("file") + " " + to_string(ltm->tm_mon + 1) + "-" + to_string(ltm->tm_mday) + "-" + to_string(ltm->tm_year + 1900) + " " + to_string(ltm->tm_hour) + " " + to_string(ltm->tm_min) + " " + to_string(ltm->tm_sec + 1) + ".log";
+		string outpath = a.get<string>("file") + " " + to_string(ltm->tm_mon + 1) + "-" + to_string(ltm->tm_mday) + "-" + to_string(ltm->tm_year + 1'900) + " " + to_string(ltm->tm_hour) + " " + to_string(ltm->tm_min) + " " + to_string(ltm->tm_sec + 1) + ".log";
 		ofstream* outputFile = new ofstream(outpath);
 		if (outputFile->is_open()) {
 			output = outputFile;
@@ -115,6 +115,7 @@ int main ( int argc, char *argv[] )
 			*output << "Utility: " << i.second << endl;
 		}
 	}
+	Node::deleteStartNode();
 
 	return EXIT_SUCCESS;
 }				/* ----------  end of function main  ---------- */

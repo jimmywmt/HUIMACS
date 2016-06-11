@@ -1,6 +1,6 @@
 BUILD ?= debug
 VPATH = src include lib
-CPPVERSION = -std=c++11
+CPPVERSION = -std=c++14
 
 # Debug
 ifeq ($(BUILD),debug)

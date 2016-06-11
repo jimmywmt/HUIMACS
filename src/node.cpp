@@ -27,11 +27,11 @@ using namespace std;
 /* 
  * Initial class static variable
  */
-Node*                                  Node::lStartNode     = NULL;
+Node*                                  Node::lStartNode     = nullptr;
 vector<unsigned>                       Node::twoTWU;
 vector<Transaction::oneTWU>*           Node::lOneTWU;
 vector<list<pair<unsigned, unsigned>>> Node::indexTable;
-const size_t                           Node::sizeIndexTable = 1024u;
+const size_t                           Node::sizeIndexTable = 1'024u;
 
 /*
  *--------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ Node::Node ( Node* iLParentNode, const int& iName, const list<int>& iFollowingNo
 	maxCheckPTable       = 0u;
 	calculate            = false;
 	for (const auto& i : iFollowingNodes) {
-		remainNodes.push_back(make_pair(i, (Node*)NULL));
+		remainNodes.push_back(make_pair(i, (Node*)nullptr));
 	}
 }
 
@@ -77,7 +77,7 @@ Node::Node ( Node* iLParentNode, const int& iName, const list<int>& iFollowingNo
 Node::~Node ()
 {
 	for (auto& i : remainNodes) {
-		if (i.second != NULL)
+		if (i.second != nullptr)
 			delete i.second;
 		
 	}
@@ -105,7 +105,7 @@ Node::operator = ( const Node &other )
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-const Node* Node::getStartNode() {
+const Node* Node::getStartNode () {
 	return Node::lStartNode;
 }
 
@@ -116,7 +116,7 @@ const Node* Node::getStartNode() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-int Node::getName () {
+int Node::getName () const {
 	return name;
 }
 
@@ -127,7 +127,7 @@ int Node::getName () {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-double Node::getPheromone () {
+double Node::getPheromone () const {
 	return pheromone;
 }
 
@@ -142,7 +142,7 @@ void  Node::positivePrue ( const vector<int> itemset, const PTable& pTable ) {
 	if (maxCheckPTable < pTable.maxVersion()) {
 		list<list<pair<int, Node*>>::iterator> locationRecord;
 		for (auto i = remainNodes.begin(); i != remainNodes.end(); ++i) {
-			if (i->second == NULL) {
+			if (i->second == nullptr) {
 				vector<int> tempItemset(itemset);
 				tempItemset.push_back(i->first);
 				if (pTable.checkTable(tempItemset, maxCheckPTable))
@@ -184,7 +184,7 @@ void Node::globalUpdate ( const vector<int> itemset, const unsigned& utility, co
 		find = false;
 		for (auto j : lNode->remainNodes) {
 			Node *lFNode = j.second;
-			if (lFNode != NULL) {
+			if (lFNode != nullptr) {
 				if (i == lFNode->getName()) {
 					find = true;
 					lNode = lFNode;
@@ -206,8 +206,19 @@ void Node::globalUpdate ( const vector<int> itemset, const unsigned& utility, co
  *--------------------------------------------------------------------------------------
  */
 Node* Node::initStartNode ( const list<int>& iFollowingNodes, const double& initPheromone ) {
-	Node::lStartNode = new Node(NULL, -1, iFollowingNodes, initPheromone);
+	Node::lStartNode = new Node(nullptr, -1, iFollowingNodes, initPheromone);
 	return Node::lStartNode;
+}
+
+/*
+ *--------------------------------------------------------------------------------------
+ *       Class:  Node
+ *      Method:  Node :: deleteStartNode
+ * Description:  
+ *--------------------------------------------------------------------------------------
+ */
+void Node::deleteStartNode () {
+	if (Node::lStartNode != nullptr) delete Node::lStartNode;
 }
 
 /*
@@ -228,7 +239,7 @@ bool Node::finish () {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-bool  Node::calculated() {
+bool Node::calculated () {
 	return calculate;
 }
 
@@ -239,7 +250,7 @@ bool  Node::calculated() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-void Node::setCalculated() {
+void Node::setCalculated () {
 	calculate = true;
 }
 
@@ -250,7 +261,7 @@ void Node::setCalculated() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-Node* Node::selectNext(vector<int>& cItemset, const double& alpha, const double& beta, const double& q0, const PTable& pTable, const double& initPheromone) {
+Node* Node::selectNext ( vector<int>& cItemset, const double& alpha, const double& beta, const double& q0, const PTable& pTable, const double& initPheromone ) {
 	if (cItemset.size() > 1u)
 		positivePrue(cItemset, pTable);
 
@@ -266,7 +277,7 @@ Node* Node::selectNext(vector<int>& cItemset, const double& alpha, const double&
 	if (cItemset.size() == 0u) {
 		for (auto i = remainNodes.begin(); i != remainNodes.end(); ++i) {
 			unsigned index = getCandidateIndex(i->first);
-			if (i->second != NULL) {
+			if (i->second != nullptr) {
 				pheromone = i->second->pheromone;
 			} else {
 				pheromone = initPheromone;
@@ -278,7 +289,7 @@ Node* Node::selectNext(vector<int>& cItemset, const double& alpha, const double&
 		unsigned t2TWU = 0u;
 		list<unsigned> no2TWU;
 		for (auto i = remainNodes.begin(); i != remainNodes.end(); ++i) {
-			if (i->second != NULL) {
+			if (i->second != nullptr) {
 				pheromone = i->second->pheromone;
 			} else {
 				pheromone = initPheromone;
@@ -328,7 +339,7 @@ Node* Node::selectNext(vector<int>& cItemset, const double& alpha, const double&
 			}
 		} while (length > 0.0);
 	}
-	if (iSelectedNode->second == NULL) {
+	if (iSelectedNode->second == nullptr) {
 		list<int> sFollowingNodes;
 		auto it = find(followingNodes.begin(), followingNodes.end(), iSelectedNode->first);
 		++it;
@@ -349,7 +360,7 @@ Node* Node::selectNext(vector<int>& cItemset, const double& alpha, const double&
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-void  Node::clearRemainNodes() {
+void  Node::clearRemainNodes () {
 	remainNodes.clear();
 }
 
@@ -360,7 +371,7 @@ void  Node::clearRemainNodes() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-void  Node::setRelatedTransactions(const list<unsigned> transactions) {
+void  Node::setRelatedTransactions ( const list<unsigned> transactions ) {
 	relatedTransactions = transactions;
 }
 
@@ -371,7 +382,7 @@ void  Node::setRelatedTransactions(const list<unsigned> transactions) {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-list<unsigned> Node::getRelatedTransactions() {
+list<unsigned> Node::getRelatedTransactions () {
 	return relatedTransactions;
 }
 /*

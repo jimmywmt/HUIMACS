@@ -89,7 +89,7 @@ ACS::operator = ( const ACS &other )
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-unsigned ACS::getNIteration() {
+unsigned ACS::getNIteration () {
 	return nIteration;
 }
 
@@ -100,7 +100,7 @@ unsigned ACS::getNIteration() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-unsigned ACS::getLastFind() {
+unsigned ACS::getLastFind () {
 	return lastFind;
 }
 /*
@@ -110,10 +110,10 @@ unsigned ACS::getLastFind() {
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-void ACS::runIteration() {
+void ACS::runIteration () {
 	Node* lCNode;
 	vector<int>    cItemset;
-	vector<int>*   lBestItemset = NULL;
+	vector<int>*   lBestItemset = nullptr;
 	unsigned       bestUtility  = 0u;
 	list<unsigned> relatedTransactions;
 
@@ -131,7 +131,7 @@ void ACS::runIteration() {
 					huis.push_back(make_pair(cItemset, get<0>(result)));
 					if (bestUtility < get<0>(result)) {
 						bestUtility = get<0>(result);
-						if (lBestItemset != NULL) delete lBestItemset;
+						if (lBestItemset != nullptr) delete lBestItemset;
 						lBestItemset = new vector<int>(cItemset);
 					}
 				} else if (!get<2>(result)) {
@@ -147,7 +147,7 @@ void ACS::runIteration() {
 		if (lCNode->getName() == -1) break;
 		Node::recurisivePrune(lCNode);
 	}
-	if (lBestItemset != NULL) {
+	if (lBestItemset != nullptr) {
 		Node::globalUpdate (*lBestItemset, bestUtility, lDataset->getThreshold());
 		delete lBestItemset;
 		lastFind = nIteration;

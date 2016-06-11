@@ -48,7 +48,7 @@ namespace huimacs {
 
 			PTable& operator = ( const PTable &other ); /* assignment operator */
 
-			unsigned maxVersion() const;
+			unsigned maxVersion () const;
 			bool checkTable ( std::vector<int>& itemset, const unsigned& version ) const;
 			void insertRecord ( std::vector<int>& itemset );
 

@@ -78,7 +78,7 @@ PTable::operator = ( const PTable &other )
  * Description:  
  *--------------------------------------------------------------------------------------
  */
-unsigned PTable::maxVersion() const {
+unsigned PTable::maxVersion () const {
 	return (unsigned)table.size();
 }
 
